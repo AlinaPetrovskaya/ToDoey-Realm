@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import CoreData
 import RealmSwift
+import ChameleonFramework
 
 enum TypeOfController: Int {
     case CategoryController
@@ -35,8 +35,10 @@ class DBManagerWrapper {
         
         switch dbManager.typeOfController {
         case .CategoryController:
-            let category  = Category()
-            category.name = title
+            let category    = Category()
+            category.name   = title
+            category.colour = UIColor.randomFlat().hexValue()
+            
             dbManager.save(with: category)
             
         case .ItemController:
@@ -45,6 +47,7 @@ class DBManagerWrapper {
             item.title       = title
             item.done        = false
             item.dateCreated = Date()
+            item.colour      = UIColor.randomFlat().hexValue()
             
             dbManager.save(item: item, with: selectedCategory)
         }

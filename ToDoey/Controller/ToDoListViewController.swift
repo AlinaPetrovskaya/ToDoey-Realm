@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SwipeCellKit
+import ChameleonFramework
 
 class ToDoListViewController: SwipeTableViewController {
     
@@ -36,11 +36,20 @@ class ToDoListViewController: SwipeTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        let cell           = super.tableView(tableView, cellForRowAt: indexPath)
+        let item           = dbManadgerWrapper?.getItemForCell(for: indexPath.row) as? Item
+        let numberOfItems  = CGFloat(dbManadgerWrapper?.getNumberOfItems() ?? 0)
+        let сategoryColour = UIColor(hexString: selectedCategory?.colour ?? "5877F6")
         
-        let item = dbManadgerWrapper?.getItemForCell(for: indexPath.row) as? Item
         cell.textLabel?.text = item?.title
-        cell.accessoryType = item?.done ?? false ? .checkmark : .none
+        cell.accessoryType   = item?.done ?? false ? .checkmark : .none
+        cell.backgroundColor = сategoryColour?.darken(byPercentage: CGFloat(indexPath.row) / numberOfItems)
+        
+        guard let safeBackgroundColor = cell.backgroundColor  else { return cell }
+        
+        cell.textLabel?.textColor = ContrastColorOf(safeBackgroundColor, returnFlat: true)
+        cell.tintColor            = ContrastColorOf(safeBackgroundColor, returnFlat: true)
+        
         
         return cell
     }
