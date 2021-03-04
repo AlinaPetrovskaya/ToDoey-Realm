@@ -10,6 +10,21 @@ import ChameleonFramework
 class CategoryViewController: SwipeTableViewController {
     var dbManagerWrapper = DBManagerWrapper(for: .CategoryController)
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        guard let navBar = navigationController?.navigationBar
+        else { fatalError("Navigation bar doesn't exist") }
+        
+        let navBarColor                 = #colorLiteral(red: 0.417593956, green: 0.5600294471, blue: 0.9730384946, alpha: 1)
+        navBar.backgroundColor          = navBarColor
+        
+        navBar.tintColor                = ContrastColorOf(navBarColor, returnFlat: true)
+        navBar.largeTitleTextAttributes = [NSAttributedString
+                                            .Key
+                                            .foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
+    }
+    
     @IBAction func AddButtonPressed(_ sender: UIBarButtonItem) {
         addAlertShow(title: "Add New Category") { [weak self] name in
             
@@ -32,7 +47,6 @@ class CategoryViewController: SwipeTableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return dbManagerWrapper.getNumberOfItems()
     }
     

@@ -36,7 +36,7 @@ class DBManager {
             
         case .ItemController:
             
-            guard let items = category?.items.sorted(byKeyPath: "title", ascending: true) else { return }
+            guard let items = category?.items.sorted(byKeyPath: "dateCreated", ascending: true) else { return }
             todoItems = items
             
             if let searchText = searchText {

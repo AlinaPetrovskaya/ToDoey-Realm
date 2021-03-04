@@ -10,11 +10,31 @@ import ChameleonFramework
 
 class ToDoListViewController: SwipeTableViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     private var dbManadgerWrapper: DBManagerWrapper?
     
     var selectedCategory: Category? {
         didSet {
             dbManadgerWrapper = DBManagerWrapper(for: .ItemController, with: selectedCategory)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        title = selectedCategory?.name
+        
+        if let categoryTextColour = selectedCategory?.colour, let categoryColour = UIColor(hexString: categoryTextColour) {
+            guard let navBar = navigationController?.navigationBar
+            else { fatalError("Navigation bar doesn't exist") }
+            
+            navBar.backgroundColor                    = categoryColour
+            navBar.tintColor                          = ContrastColorOf(categoryColour, returnFlat: true)
+            navBar.largeTitleTextAttributes           = [NSAttributedString
+                                                            .Key
+                                                            .foregroundColor: ContrastColorOf(categoryColour, returnFlat: true)]
+            searchBar.barTintColor                    = categoryColour
+            searchBar.searchTextField.backgroundColor = .white
         }
     }
     
