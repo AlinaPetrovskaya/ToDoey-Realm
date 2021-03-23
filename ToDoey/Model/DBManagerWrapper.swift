@@ -39,7 +39,7 @@ class DBManagerWrapper {
             category.name   = title
             category.colour = UIColor.randomFlat().hexValue()
             
-            dbManager.save(with: category)
+            dbManager.saveItems(with: category)
             
         case .ItemController:
             guard let selectedCategory = selectedCategory else { return }
@@ -47,9 +47,7 @@ class DBManagerWrapper {
             item.title       = title
             item.done        = false
             item.dateCreated = Date()
-            item.colour      = UIColor.randomFlat().hexValue()
-            
-            dbManager.save(item: item, with: selectedCategory)
+            dbManager.saveItems(item: item, with: selectedCategory)
         }
     }
     

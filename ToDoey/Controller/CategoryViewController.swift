@@ -18,14 +18,14 @@ class CategoryViewController: SwipeTableViewController {
         
         let navBarColor                 = #colorLiteral(red: 0.417593956, green: 0.5600294471, blue: 0.9730384946, alpha: 1)
         navBar.backgroundColor          = navBarColor
-        
+        navBar.barTintColor             = navBarColor
         navBar.tintColor                = ContrastColorOf(navBarColor, returnFlat: true)
         navBar.largeTitleTextAttributes = [NSAttributedString
                                             .Key
                                             .foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
     }
     
-    @IBAction func AddButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         addAlertShow(title: "Add New Category") { [weak self] name in
             
             self?.dbManagerWrapper.appendNewItem(with: name)
@@ -60,7 +60,6 @@ class CategoryViewController: SwipeTableViewController {
         guard let safeBackgroundColor = cell.backgroundColor else { return cell }
         cell.textLabel?.textColor = ContrastColorOf(safeBackgroundColor, returnFlat: true)
         
-        
         return cell
     }
     
@@ -69,3 +68,4 @@ class CategoryViewController: SwipeTableViewController {
         performSegue(withIdentifier: "goToItems", sender: self)
     }
 }
+

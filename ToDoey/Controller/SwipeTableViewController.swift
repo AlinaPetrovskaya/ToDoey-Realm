@@ -8,7 +8,6 @@
 import UIKit
 import SwipeCellKit
 
-
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
 
     override func viewDidLoad() {
@@ -51,5 +50,4 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func updateModel(at indexPath: IndexPath) {
         //upate Datamodel
     }
-
 }

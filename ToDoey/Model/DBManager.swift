@@ -45,8 +45,7 @@ class DBManager {
         }
     }
     
-    
-    func save(item: Item? = nil, with category: Category? = nil) {
+    func saveItems(item: Item? = nil, with category: Category? = nil) {
         do {
             try realm.write {
         
