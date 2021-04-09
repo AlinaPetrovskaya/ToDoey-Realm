@@ -27,7 +27,7 @@ This application was developed to learn the following concepts of iOS developmen
 ## Installation
 1. Download the repository
 
-`git clone https://github.com/AlinaPetrovskaya/ToDoeyRealm.git`
+`git clone https://github.com/Alina-Petrovskaya/ToDoeyRealm.git`
 
 2. Go to app's directory
 
